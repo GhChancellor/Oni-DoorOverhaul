@@ -1,0 +1,94 @@
+﻿
+// -----------------------------------------------------------------------
+
+//namespace Door_Overhaul
+//{
+//    public class STRINGS
+//    {
+//        public class BUILDINGS
+//        {
+//            public class PREFABS
+//            {
+//                public class DOOR
+//                {
+//                    public class PNEUMATIC
+//                    {
+//                        public class TINYDOOR
+//                        {
+//                            public static LocString NAME = FormatAsLink("Tiny Pneumatic Door", "Tiny Door");
+//                            public static LocString DESC = "Tiny Door, fitted for very tiny duplicant.";
+//                            public static LocString EFFECT = "Encloses areas without blocking " +
+//                                FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " or " +
+//                                FormatAsLink("Gas", "ELEMENTS_GAS") + " flow.\n\nWild " +
+//                                FormatAsLink("Critters", "CRITTERS") +
+//                                " cannot pass through doors.";
+//                        }
+//                    }
+
+//                    public class MANUAL_AIRLOCK
+//                    {
+//                        public class TINYDOOR
+//                        {
+//                            public static LocString NAME = FormatAsLink("Tiny Manual Airlock", "TINYMANUALPRESSUREDOOR");
+//                            public static LocString DESC = "Tiny Manual Airlocks fitted for very tiny duplicant.";
+//                            public static LocString EFFECT = "Blocks " +
+//                                FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " and " +
+//                                FormatAsLink("Gas", "ELEMENTS_GAS") +
+//                                " flow, maintaining pressure between areas.\n\nWild " +
+//                                FormatAsLink("Critters", "CRITTERS") +
+//                                " cannot pass through doors.";
+//                        }
+//                    }
+
+//                    public class MECHANIZED_AIRLOCK
+//                    {
+//                        public class TINYDOOR
+//                        {
+//                            public static LocString NAME = FormatAsLink("Tiny Mechanized Airlock", "TINYPRESSUREDOOR");
+//                            public static LocString DESC = "Tiny Mechanized Airlocks fitted for very tiny duplicant.";
+//                            public static LocString EFFECT = "Blocks " +
+//                                FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " and " +
+//                                FormatAsLink("Gas", "ELEMENTS_GAS") +
+//                                " flow, maintaining pressure between areas.\n\nFunctions as a " +
+//                                FormatAsLink("Manual Airlock", "TINYMANUALPRESSUREDOOR") + " when no " +
+//                                FormatAsLink("Power", "POWER") + " is available.\n\nWild " +
+//                                FormatAsLink("Critters", "CRITTERS") + " cannot pass through doors.";
+//                        }
+//                    }
+
+
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+
+//    internal class STRINGS
+//    {
+//        public class BUILDINGS
+//        {
+//            public class PREFABS
+//            {
+//                public class TINYDOOR
+//                {
+//                    public static LocString NAME = FormatAsLink("Tiny Pneumatic Door", TinyDoorConfig.ID);
+//                    public static LocString DESC = "Tiny Door, fitted for very tiny duplicant.";
+//                    public static LocString EFFECT = "Encloses areas without blocking " + FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " or " + FormatAsLink("Gas", "ELEMENTS_GAS") + " flow.\n\nWild " + FormatAsLink("Critters", "CRITTERS") + " cannot pass through doors.";
+//                }
+//                public class TINYPRESSUREDOOR
+//                {
+//                    public static LocString NAME = FormatAsLink("Tiny Mechanized Airlock", "TINYPRESSUREDOOR");
+//                    public static LocString DESC = "Tiny Mechanized Airlocks fitted for very tiny duplicant.";
+//                    public static LocString EFFECT = "Blocks " + FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " and " + FormatAsLink("Gas", "ELEMENTS_GAS") + " flow, maintaining pressure between areas.\n\nFunctions as a " + FormatAsLink("Manual Airlock", "TINYMANUALPRESSUREDOOR") + " when no " + FormatAsLink("Power", "POWER") + " is available.\n\nWild " + FormatAsLink("Critters", "CRITTERS") + " cannot pass through doors.";
+//                }
+//                public class TINYMANUALPRESSUREDOOR
+//                {
+//                    public static LocString NAME = FormatAsLink("Tiny Manual Airlock", "TINYMANUALPRESSUREDOOR");
+//                    public static LocString DESC = "Tiny Manual Airlocks fitted for very tiny duplicant.";
+//                    public static LocString EFFECT = "Blocks " + FormatAsLink("Liquid", "ELEMENTS_LIQUID") + " and " + FormatAsLink("Gas", "ELEMENTS_GAS") + " flow, maintaining pressure between areas.\n\nWild " + FormatAsLink("Critters", "CRITTERS") + " cannot pass through doors.";
+//                }
+//            }
+//        }
+//    }

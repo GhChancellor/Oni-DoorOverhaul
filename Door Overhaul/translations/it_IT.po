@@ -1,0 +1,19 @@
+﻿# Italian
+
+msgid ""
+msgstr ""
+
+#. Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.NAME
+msgctxt "Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.NAME"
+msgid "PneumaticTrapDoor"
+msgstr "Botola Pneumatica"
+
+#. Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.DESC
+msgctxt "Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.DESC"
+msgid "Pneumatic Trap Door, designed for tight spaces and easy access."
+msgstr "La Botola Pneumatica, è progettata per accedere facilmente a spazie ristretti."
+
+#. Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.EFFECT
+msgctxt "Door_Overhaul.STRINGS.BUILDINGS.PREFABS.PNEUMATICTRAPDOOR.EFFECT"
+msgid "Encloses areas without blocking <link=\"ELEMENTSLIQUID\">Liquidi</link> or <link=\"ELEMENTSGAS\">Gas</link> flow.\n\nWild <link=\"CREATURES\">Critters</link> cannot pass through doors."
+msgstr "Delimita due aree senza bloccare il flusso di <link=\"ELEMENTSLIQUID\">Liquidi</link> or <link=\"ELEMENTSGAS\">Gas</link>. \n\nLe <link=\"CREATURES\">Creature</link> selvatiche non possono attraversare le porte."
