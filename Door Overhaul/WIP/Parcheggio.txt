@@ -1,4 +1,84 @@
 ﻿
+
+
+
+using TUNING;
+using UnityEngine;
+
+namespace Door_Overhaul
+{
+    internal class MoveButton : KMonoBehaviour
+    {
+#pragma warning disable CS0649
+        [MyCmpGet]
+        private Deconstructable deconstructable;
+#pragma warning restore CS0649
+
+        private PneumaticTrapDoorManager pneumaticTrapDoorManager;
+
+        protected override void OnPrefabInit()
+        {
+            pneumaticTrapDoorManager = new PneumaticTrapDoorManager();
+            base.OnPrefabInit();
+            this.Subscribe((int)GameHashes.RefreshUserMenu, new System.Action<object>(OnRefreshUserMenu));
+        }
+
+        private void OnRefreshUserMenu(object data)
+        {
+            Game.Instance.userMenu.AddButton(
+                go: this.gameObject,
+                button: new KIconButtonMenu.ButtonInfo(
+                    iconName: "action_mirror",
+                    text: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.NAME,
+                    on_click: new System.Action(CopyPneumaticTrapDoor),
+                    shortcutKey: Action.BuildingUtility1,
+                    tooltipText: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.TOOLTIP
+                )
+            );
+        }
+
+        private void CopyPneumaticTrapDoor()
+        {
+            var buildingDef = Assets.GetBuildingDef(PneumaticTrapDoor.ID);
+            if (buildingDef != null)
+            {
+                Debug.Log("BuildingDef found for ID: " + PneumaticTrapDoor.ID);
+                Debug.Log("BuildingDef name: " + buildingDef.PrefabID);
+
+                StartBuildingPlacement(buildingDef);
+            }
+            else
+            {
+                Debug.LogError("BuildingDef not found for ID: " + PneumaticTrapDoor.ID);
+            }
+        }
+
+        private void StartBuildingPlacement(BuildingDef buildingDef)
+        {
+
+            // Trova il tool di copia
+            var copySettingsTool = CopySettingsTool.Instance;
+            if (copySettingsTool != null)
+            {
+                Debug.Log("CopySettingsTool Found");
+       
+                copySettingsTool.SetSourceObject(this.gameObject);
+                PlayerController.Instance.ActivateTool(copySettingsTool);
+
+                Debug.Log("CopySettingsTool Activated " + buildingDef.PrefabID);
+            }
+            else
+            {
+                Debug.LogError("CopySettingsTool Not Found");
+            }
+        }
+    }
+}
+
+
+
+
+
 // -----------------------------------------------------------------------
 
 //namespace Door_Overhaul

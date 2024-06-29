@@ -17,9 +17,14 @@ namespace Door_Overhaul
         /* Which tech tree entry to add to, "none" if no research is requried. */
         public const string tech = "none";
 
+        private PneumaticTrapDoorManager pneumaticTrapDoor =
+            new PneumaticTrapDoorManager();
+
         public override BuildingDef CreateBuildingDef()
         {
-            float[] constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER1;
+            var (constructionMass, constructionTime) =
+                pneumaticTrapDoor.Create();
+
             string[] allMetals = MATERIALS.ALL_METALS;
 
             EffectorValues decor = TUNING.BUILDINGS.DECOR.NONE;
@@ -32,7 +37,7 @@ namespace Door_Overhaul
                 height: 1,
                 anim: "tiny_door_internal_kanim",
                 hitpoints: 30,
-                construction_time: 5f,
+                construction_time: constructionTime,
                 construction_mass: constructionMass,
                 construction_materials: allMetals,
                 melting_point: 1600f,
@@ -63,6 +68,7 @@ namespace Door_Overhaul
             go.AddOrGet<AccessControl>().controlEnabled = true;
             go.AddOrGet<CopyBuildingSettings>().copyGroupTag = GameTags.Door;
             go.AddOrGet<Workable>().workTime = 3f;
+            go.AddOrGet<MoveButton>();
             ((KAnimControllerBase)go.GetComponent<KBatchedAnimController>()).initialAnim = "closed";
             go.AddOrGet<ZoneTile>();
             go.AddOrGet<KBoxCollider2D>();
@@ -71,4 +77,3 @@ namespace Door_Overhaul
         }
     }
 }
- 

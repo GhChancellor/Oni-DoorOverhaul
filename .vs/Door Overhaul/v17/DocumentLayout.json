@@ -1,26 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\",
+  "WorkspaceRootPath": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\door overhaul\\door overhaul\\doormanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\online\\oni-dooroverhaul\\door overhaul\\textlocalization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\textlocalization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\door overhaul\\doormanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\doormanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\door overhaul\\door overhaul\\mod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\door overhaul\\mod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\mod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\door overhaul\\door overhaul\\patch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\door overhaul\\patch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\patch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\door overhaul\\door overhaul\\pneumatictrapdoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\door overhaul\\pneumatictrapdoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\pneumatictrapdoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|d:\\programmazione\\modding\\oni\\scritttura\\door overhaul\\door overhaul\\textlocalization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6C34DA8-D639-473F-9CAF-D3B70A0D0E71}|Door Overhaul\\Door Overhaul.csproj|solutionrelative:door overhaul\\textlocalization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,15 +30,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 206,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "TextLocalization.cs",
-              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\TextLocalization.cs",
+              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\TextLocalization.cs",
               "RelativeDocumentMoniker": "Door Overhaul\\TextLocalization.cs",
-              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\TextLocalization.cs",
+              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\TextLocalization.cs",
               "RelativeToolTip": "Door Overhaul\\TextLocalization.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -47,55 +47,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PneumaticTrapDoor.cs",
-              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\PneumaticTrapDoor.cs",
+              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\PneumaticTrapDoor.cs",
               "RelativeDocumentMoniker": "Door Overhaul\\PneumaticTrapDoor.cs",
-              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\PneumaticTrapDoor.cs",
+              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\PneumaticTrapDoor.cs",
               "RelativeToolTip": "Door Overhaul\\PneumaticTrapDoor.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T06:31:29.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-02T06:31:29.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Patch.cs",
+              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\Patch.cs",
+              "RelativeDocumentMoniker": "Door Overhaul\\Patch.cs",
+              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\Patch.cs",
+              "RelativeToolTip": "Door Overhaul\\Patch.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T06:31:10.862Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Patch.cs",
-              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\Patch.cs",
-              "RelativeDocumentMoniker": "Door Overhaul\\Patch.cs",
-              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\Patch.cs",
-              "RelativeToolTip": "Door Overhaul\\Patch.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAiAAAA",
+              "Title": "Mod.cs",
+              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\Mod.cs",
+              "RelativeDocumentMoniker": "Door Overhaul\\Mod.cs",
+              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\Mod.cs",
+              "RelativeToolTip": "Door Overhaul\\Mod.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T06:31:10.862Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-02T06:30:52.097Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Mod.cs",
-              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\Mod.cs",
-              "RelativeDocumentMoniker": "Door Overhaul\\Mod.cs",
-              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\Mod.cs",
-              "RelativeToolTip": "Door Overhaul\\Mod.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T06:30:52.097Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "DoorManagement.cs",
-              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\DoorManagement.cs",
+              "DocumentMoniker": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\DoorManagement.cs",
               "RelativeDocumentMoniker": "Door Overhaul\\DoorManagement.cs",
-              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Door Overhaul\\Door Overhaul\\DoorManagement.cs",
+              "ToolTip": "D:\\Programmazione\\Modding\\ONI\\Scritttura\\Online\\Oni-DoorOverhaul\\Door Overhaul\\DoorManagement.cs",
               "RelativeToolTip": "Door Overhaul\\DoorManagement.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAcAAAAyAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T06:30:37.307Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-02T06:30:37.307Z"
             }
           ]
         }

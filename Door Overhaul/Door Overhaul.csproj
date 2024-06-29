@@ -66,7 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoorManagement.cs" />
+    <Compile Include="IDoorOperations.cs" />
+    <Compile Include="MoveButton.cs" />
     <Compile Include="Patch.cs" />
+    <Compile Include="PneumaticTrapDoorManager.cs" />
     <Compile Include="TextLocalization.cs" />
     <Compile Include="ui\STRING.cs" />
     <Compile Include="PneumaticTrapDoor.cs" />
@@ -82,10 +85,8 @@
     <Content Include="WIP\Pinta\PneumaticTrapDoor\V001\freccia.png" />
     <Content Include="WIP\Pinta\PneumaticTrapDoor\V001\tiny_door_internal - Copia.png" />
     <Content Include="WIP\Pinta\PneumaticTrapDoor\V001\tiny_door_internal.png" />
-    <Content Include="README.txt" />
     <None Include="anim\assets\tiny_door_internal\tiny_door_internal_anim.bytes" />
     <None Include="anim\assets\tiny_door_internal\tiny_door_internal_build.bytes" />
-    <None Include="release\DoorOverhaul.zip" />
     <None Include="WIP\Pinta\PneumaticTrapDoor\Originale\tiny_door_internal_anim.bytes" />
     <None Include="WIP\Pinta\PneumaticTrapDoor\Originale\tiny_door_internal_build.bytes" />
     <None Include="translations\it_IT.po" />

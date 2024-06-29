@@ -18,6 +18,12 @@ namespace Door_Overhaul
                         FormatAsLink("Critters", "CREATURES") +
                         " cannot pass through doors.";
                 }
+
+                public class MOVEDOOR
+                {
+                    public static LocString NAME = "Move door";
+                    public static LocString TOOLTIP = "Move this door";
+                }
             }
         }
     }

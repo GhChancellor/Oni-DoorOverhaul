@@ -1,0 +1,9 @@
+﻿CopyBuildingOrder(BuildingDef buildingDef, string facadeID): 
+Utilizza la definizione di un edificio e un ID di facciata per copiare un 
+ordine di costruzione, aggiornando l'interfaccia utente per mostrare le 
+informazioni dell'edificio selezionato.
+
+CopyBuildingOrder(Building building): 
+Utilizza un oggetto edificio esistente per copiare un ordine di costruzione.
+Oltre a chiamare il primo metodo, questo gestisce la selezione dei materiali
+e l'orientamento dello strumento di costruzione.
