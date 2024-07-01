@@ -17,13 +17,39 @@ namespace Door_Overhaul
         /* Which tech tree entry to add to, "none" if no research is requried. */
         public const string tech = "none";
 
+        private bool _isReplacement;
+
         private PneumaticTrapDoorManager pneumaticTrapDoor =
             new PneumaticTrapDoorManager();
 
+        public void SetReplacement(bool isReplacement)
+        {
+            _isReplacement = isReplacement;
+            Debug.Log("PneumaticTrapDoor SetReplacement - " + _isReplacement);
+
+        }
+
         public override BuildingDef CreateBuildingDef()
         {
-            var (constructionMass, constructionTime) =
-                pneumaticTrapDoor.Create();
+
+            float[] constructionMass;
+            float constructionTime;
+
+            Debug.Log("PneumaticTrapDoor - _isReplacement before if - " + _isReplacement);
+
+            if (_isReplacement)
+            {
+                (constructionMass, constructionTime) = Replace();
+                Debug.Log("PneumaticTrapDoor Replace - " + _isReplacement);
+            }
+            else
+            {
+                (constructionMass, constructionTime) = Create();
+                Debug.Log("PneumaticTrapDoor Create - " + _isReplacement);
+            }
+
+            Debug.Log($"PneumaticTrapDoor - constructionTime {constructionTime}");
+
 
             string[] allMetals = MATERIALS.ALL_METALS;
 
@@ -55,6 +81,8 @@ namespace Door_Overhaul
             buildingDef.LogicInputPorts = DoorConfig.CreateSingleInputPortList(new CellOffset(0, 0));
             SoundEventVolumeCache.instance.AddVolume("door_internal_kanim", "Open_DoorInternal", noisePollution);
             SoundEventVolumeCache.instance.AddVolume("door_internal_kanim", "Close_DoorInternal", noisePollution);
+
+            Debug.Log($"PneumaticTrapDoor - Final constructionTime in BuildingDef: {buildingDef.ConstructionTime}");
             return buildingDef;
         }
 
@@ -74,6 +102,33 @@ namespace Door_Overhaul
             go.AddOrGet<KBoxCollider2D>();
             Prioritizable.AddRef(go);
             Object.DestroyImmediate((Object)go.GetComponent<BuildingEnabledButton>());
+        }
+
+        public (float[], float) Create()
+        {
+
+            float[] constructionMass;
+            float constructionTime;
+
+            constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER1;
+            constructionTime = 10f; // 5 seconds
+
+            Debug.Log($"Create - constructionMass: {string.Join(",", constructionMass)}, constructionTime: {constructionTime}");
+
+            return (constructionMass, constructionTime);
+        }
+
+        public (float[], float) Replace()
+        {
+            float[] constructionMass;
+            float constructionTime;
+
+            constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER_TINY;
+            constructionTime = 1f; // 0 seconds
+
+            Debug.Log($"Replace - constructionMass: {string.Join(",", constructionMass)}, constructionTime: {constructionTime}");
+
+            return (constructionMass, constructionTime);
         }
     }
 }

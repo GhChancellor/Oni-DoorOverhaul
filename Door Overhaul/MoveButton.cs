@@ -38,17 +38,27 @@ namespace Door_Overhaul
 
         private void DuplicateDoor(String doorID)
         {
-            Building[] doorBuilds = GameObject.FindObjectsOfType<Building>();
+            PneumaticTrapDoor pneumaticTrapDoor = new PneumaticTrapDoor();
+            PneumaticTrapDoorManager pneumaticTrapDoorManager =
+                new PneumaticTrapDoorManager();
 
-            foreach (Building door in doorBuilds)
-            {
-                if (door.Def.PrefabID == doorID)
-                {
-                    PlanScreen planScreen = PlanScreen.Instance;
-                    planScreen.CopyBuildingOrder(door);
-                    break;
-                }
-            }
+            pneumaticTrapDoorManager.Destroy(deconstructable);
+            pneumaticTrapDoor.SetReplacement(true);
+
+            // change recipe, change costructionTime
+            BuildingDef buildingDef = pneumaticTrapDoor.CreateBuildingDef();
+            Debug.Log("DuplicateDoor - BuildingDef create: " + buildingDef);
+            Debug.Log("DuplicateDoor - BuildingDef create: PrefabID: " + buildingDef.PrefabID);
+            Debug.Log("DuplicateDoor - BuildingDef construzionTime: " + buildingDef.ConstructionTime);
+
+            //BuildingDef _buildingDef = Assets.GetBuildingDef(PneumaticTrapDoor.ID);
+            //Debug.Log("DuplicateDoor - Assets.GetBuildingDef PrefabID" + _buildingDef.PrefabID);
+            //Debug.Log("DuplicateDoor - Assets.GetBuildingDef " + _buildingDef.ConstructionTime);
+
+            PlanScreen planScreen = PlanScreen.Instance;
+            planScreen.CopyBuildingOrder(buildingDef, PneumaticTrapDoor.ID);
+
+
         }
 
 
