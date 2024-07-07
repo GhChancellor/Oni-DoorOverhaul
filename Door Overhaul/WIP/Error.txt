@@ -1,0 +1,56 @@
+﻿Hi guys
+
+from here:
+https://github.com/GhChancellor/Oni-DoorOverhaul/tree/main/Door Overhaul 
+
+I have an item
+
+PneumaticTrapDoor02 ( PneumaticTrapDoor02.cs )
+
+I would like to add it without adding it to the menu.
+
+(  ModUtil.AddBuildingToPlanScreen(categoryMenu, buildingID, subCategoryID); )
+
+
+        [HarmonyPatch(typeof(Db))]
+        [HarmonyPatch(nameof(Db.Initialize))]
+        public static class Db_Initialize_Patch
+        {
+            /// <summary>
+            /// Init Db_Initialize
+            /// </summary>
+            public static void Postfix()
+            {
+		.......
+
+                RegisterNewDoor();
+            }
+
+            private static void RegisterNewDoor()
+            {
+                PneumaticTrapDoor02 pneumaticTrapDoor02 = new PneumaticTrapDoor02();
+                BuildingDef newBuildingDef = pneumaticTrapDoor02.CreateBuildingDef();
+                if (newBuildingDef != null)
+                {
+                    Assets.AddBuildingDef(newBuildingDef);
+                    Debug.Log($"Registered new building: {newBuildingDef.PrefabID}");
+                }
+            }
+
+        }
+
+
+Error in GameAssets(Clone).Assets.OnPrefabInit at (0.0, 0.0, 0.0)
+
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+  at System.Linq.Enumerable.Where[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x0000d] in <351e49e2a5bf4fd6beabb458ce2255f3>:0 
+  at Assets.AddBuildingDef (BuildingDef def) [0x0000d] in <3d436e4ec1d5455793674ec559b0cc77>:0 
+  at Door_Overhaul.Patch+Db_Initialize_Patch.RegisterNewDoor () [0x0001a] in <c7d84af9bc5247dc867d3d71dffefa11>:0 
+  at Door_Overhaul.Patch+Db_Initialize_Patch.Postfix () [0x00026] in <c7d84af9bc5247dc867d3d71dffefa11>:0 
+  at (wrapper dynamic-method) Db.Db.Initialize_Patch1(Db)
+  at Db.Get () [0x0001c] in <3d436e4ec1d5455793674ec559b0cc77>:0 
+  at Assets.CreatePrefabs () [0x00000] in <3d436e4ec1d5455793674ec559b0cc77>:0 
+  at Assets.OnPrefabInit () [0x00234] in <3d436e4ec1d5455793674ec559b0cc77>:0 
+  at KMonoBehaviour.InitializeComponent () [0x00068] in <3ca21dc18eae422d87255277091f8593>:0 
+Build: U51-600112-SD

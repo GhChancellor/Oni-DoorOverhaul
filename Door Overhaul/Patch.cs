@@ -31,7 +31,20 @@ namespace Door_Overhaul
                 AddDoorToBuildMenu(PneumaticTrapDoor.categoryMenu, PneumaticTrapDoor.ID, PneumaticTrapDoor.subCategoryID);
                 AddDoorToTechTree(PneumaticTrapDoor.ID, PneumaticTrapDoor.tech);
 
+                RegisterNewDoor();
             }
+
+            private static void RegisterNewDoor()
+            {
+                PneumaticTrapDoor02 pneumaticTrapDoor02 = new PneumaticTrapDoor02();
+                BuildingDef newBuildingDef = pneumaticTrapDoor02.CreateBuildingDef();
+                if (newBuildingDef != null)
+                {
+                    Assets.AddBuildingDef(newBuildingDef);
+                    Debug.Log($"Registered new building: {newBuildingDef.PrefabID}");
+                }
+            }
+
         }
     }
 }

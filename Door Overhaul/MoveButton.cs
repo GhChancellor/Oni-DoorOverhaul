@@ -29,35 +29,47 @@ namespace Door_Overhaul
                 button: new KIconButtonMenu.ButtonInfo(
                     iconName: "action_mirror",
                     text: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.NAME,
-                    on_click: new System.Action( () => DuplicateDoor(PneumaticTrapDoor.ID)),
+                    on_click: new System.Action( () => DuplicateDoor(PneumaticTrapDoor02.ID)),
                     shortcutKey: Action.BuildingUtility1,
                     tooltipText: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.TOOLTIP
                 )
             );
         }
-
         private void DuplicateDoor(String doorID)
         {
-            PneumaticTrapDoor pneumaticTrapDoor = new PneumaticTrapDoor();
-            PneumaticTrapDoorManager pneumaticTrapDoorManager =
-                new PneumaticTrapDoorManager();
+            var buildingDef = Assets.GetBuildingDef(doorID);
+            if (buildingDef != null)
+            {
+                Debug.Log("BuildingDef found for ID: " + doorID);
+                Debug.Log("BuildingDef name: " + buildingDef.PrefabID);
+                Debug.Log("BuildingDef time: " + buildingDef.ConstructionTime);
 
-            pneumaticTrapDoorManager.Destroy(deconstructable);
-            pneumaticTrapDoor.SetReplacement(true);
+                // Utilizza la logica di copia per piazzare l'edificio
+                ActivateBuildTool(buildingDef);
+            }
+            else
+            {
+                Debug.LogError("BuildingDef not found for ID: " + doorID);
+            }
+        }
 
-            // change recipe, change costructionTime
-            BuildingDef buildingDef = pneumaticTrapDoor.CreateBuildingDef();
-            Debug.Log("DuplicateDoor - BuildingDef create: " + buildingDef);
-            Debug.Log("DuplicateDoor - BuildingDef create: PrefabID: " + buildingDef.PrefabID);
-            Debug.Log("DuplicateDoor - BuildingDef construzionTime: " + buildingDef.ConstructionTime);
-
-            //BuildingDef _buildingDef = Assets.GetBuildingDef(PneumaticTrapDoor.ID);
-            //Debug.Log("DuplicateDoor - Assets.GetBuildingDef PrefabID" + _buildingDef.PrefabID);
-            //Debug.Log("DuplicateDoor - Assets.GetBuildingDef " + _buildingDef.ConstructionTime);
-
+        private void ActivateBuildTool(BuildingDef buildingDef)
+        {
             PlanScreen planScreen = PlanScreen.Instance;
-            planScreen.CopyBuildingOrder(buildingDef, PneumaticTrapDoor.ID);
 
+            if (planScreen != null)
+            {
+                Debug.Log("PlanScreen OK");
+
+                planScreen.CopyBuildingOrder(buildingDef, PneumaticTrapDoor02.ID);
+
+                // planScreen.RefreshCopyBuildingButton(this.gameObject);
+                // planScreen.OnSelectBuilding(this.gameObject, buildingDef, PneumaticTrapDoor.ID);
+            }
+            else
+            {
+                Debug.LogError("PlanScreen NO");
+            }
 
         }
 

@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Door_Overhaul
 {
-    internal class PneumaticTrapDoor : IBuildingConfig
+    internal class PneumaticTrapDoor02 : IBuildingConfig
     {
         /* Name of item */
-        public const string ID = "PneumaticTrapDoor";
+        public const string ID = "NewPneumaticTrapDoor";
 
         /* Which build menu to add to */
         public const string categoryMenu = "Base";
@@ -23,7 +23,7 @@ namespace Door_Overhaul
         public override BuildingDef CreateBuildingDef()
         {
             var (constructionMass, constructionTime) =
-                pneumaticTrapDoor.Create();
+                pneumaticTrapDoor.Replace();
 
             string[] allMetals = MATERIALS.ALL_METALS;
 
@@ -32,7 +32,7 @@ namespace Door_Overhaul
             EffectorValues noisePollution = TUNING.NOISE_POLLUTION.NOISY.TIER2;
 
             BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(
-                id: PneumaticTrapDoor.ID,
+                id: PneumaticTrapDoor02.ID,
                 width: 1,
                 height: 1,
                 anim: "tiny_door_internal_kanim",

@@ -46,7 +46,7 @@ namespace Door_Overhaul
             constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER_TINY;
 
             /* 3 seconds */
-            constructionTime = TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
+            constructionTime = 1; //TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
 
             return (constructionMass, constructionTime);
         }
