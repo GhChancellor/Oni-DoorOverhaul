@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>  <!--net472-->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>  <!--disable-->
+    <LangVersion>10</LangVersion> <!-- Da Aggiungere -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HarmonyX" Version="2.10.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <Reference Include="Assembly-CSharp">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/Assembly-CSharp.dll</HintPath>
+    </Reference>
+
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+
+    <Reference Include="0Harmony">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/0Harmony.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/UnityEngine.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/UnityEngine.UI.dll</HintPath>
+    </Reference>
+
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>/home/lele/Documenti/Archivio/Archivio/Programmazione/Modding/ONI/tools/lib/UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+
+    <Content Include="anim\assets\tiny_door_internal\tiny_door_internal.png" />
+    <Content Include="anim\assets\tiny_door_internal\tiny_door_internal_anim.bytes" />
+    <Content Include="anim\assets\tiny_door_internal\tiny_door_internal_build.bytes" />
+    <Content Include="translations\it_IT.po" />
+  </ItemGroup>
+
+  <!--Aggiunge il file DLL direttamente nella cartella selezionata modificare Prova01.dll con il nome giusto-->
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cp &quot;$(TargetPath)&quot; &quot;/home/lele/.config/unity3d/Klei/Oxygen Not Included/mods/Dev/DoorOverhaul/Door Overhaul.dll&quot;" />
+  </Target>
+
+</Project>
+
