@@ -1,9 +1,4 @@
-﻿using STRINGS;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Door_Overhaul
+﻿namespace Door_Overhaul
 {
     internal class MoveButton : KMonoBehaviour
     {
@@ -12,15 +7,30 @@ namespace Door_Overhaul
         private Deconstructable deconstructable;
 #pragma warning restore CS0649
 
-        private PneumaticTrapDoorManager pneumaticTrapDoorManager;
+        public static string BuildingID { get; set; }
+
+        private static readonly Dictionary<string, Action<Deconstructable>> destroyActions =
+            new Dictionary<string, Action<Deconstructable>>
+        {
+            {PneumaticTrapDoor.GetBuildingID(), (deconstructable) => new PneumaticTrapDoorManager().Destroy(deconstructable)},
+            {PneumaticTrapDoorReplace.GetBuildingID(), (deconstructable) => new PneumaticTrapDoorManager().Destroy(deconstructable)},
+
+            // {NoPawNoProblemDoor.GetBuildingID(), (deconstructable) => new NoPawNoProblemDoorManager().Destroy(deconstructable)},
+            // {NoPawNoProblemDoorReplace.GetBuildingID(), (deconstructable) => new NoPawNoProblemDoorManager().Destroy(deconstructable)}
+
+        };
 
         protected override void OnPrefabInit()
         {
-            pneumaticTrapDoorManager = new PneumaticTrapDoorManager();
-
             base.OnPrefabInit();
             this.Subscribe((int)GameHashes.RefreshUserMenu,
                 new System.Action<object>(OnRefreshUserMenu));
+        }
+
+        protected override void OnCleanUp()
+        {
+            Unsubscribe((int)GameHashes.RefreshUserMenu);
+            base.OnCleanUp();
         }
 
         private void OnRefreshUserMenu(object data)
@@ -30,31 +40,48 @@ namespace Door_Overhaul
                 button: new KIconButtonMenu.ButtonInfo(
                     iconName: "action_mirror",
                     text: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.NAME,
-                    // on_click: new System.Action(() => DuplicateDoor(PneumaticTrapDoorReplace.ID)),
-                    on_click: new System.Action(() => DuplicateDoor(PneumaticTrapDoorReplace.GetID())),
+                    on_click: new System.Action(() => DuplicateDoor()),
                     shortcutKey: Action.BuildingUtility1,
                     tooltipText: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.TOOLTIP
                 )
             );
         }
 
-        private void DuplicateDoor(String doorID)
+        private void DuplicateDoor2(String _doorID)
         {
-            pneumaticTrapDoorManager.Destroy(deconstructable);
-            Destroy(deconstructable);
+            string doorID = PneumaticTrapDoorReplace.GetBuildingID();
+
+            Debug.Log("DuplicateDoor2");
             PlanScreen planScreen = PlanScreen.Instance;
 
             var buildingDef = Assets.GetBuildingDef(doorID);
+
+            planScreen.OnSelectBuilding(this.gameObject, buildingDef, doorID);
+            planScreen.CopyBuildingOrder(buildingDef, doorID);
+
+        }
+
+        private void DuplicateDoor()
+        {
+            Destroy(deconstructable);
+            PlanScreen planScreen = PlanScreen.Instance;
+
+            var buildingDef = Assets.GetBuildingDef(BuildingID);
+
             if (buildingDef != null && planScreen != null)
             {
-                //planScreen.CopyBuildingOrder(buildingDef, PneumaticTrapDoorReplace.ID);
-                planScreen.CopyBuildingOrder(buildingDef, PneumaticTrapDoorReplace.GetID());
+                planScreen.CopyBuildingOrder(buildingDef, BuildingID);
             }
+
+            BuildingID = null;
         }
 
         private void Destroy(Deconstructable deconstructable)
         {
-            pneumaticTrapDoorManager.Destroy(deconstructable);
+            if (destroyActions.TryGetValue(BuildingID, out var destroyAction))
+            {
+                destroyAction(deconstructable);
+            }
         }
     }
 }

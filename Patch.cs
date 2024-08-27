@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using static Door_Overhaul.TextLocalization;
-using static Door_Overhaul.DoorManagement;
-using static Door_Overhaul.STRINGS.BUILDINGS.PREFABS;
+using static Door_Overhaul.BuildTechIntegrationManager;
 
 namespace Door_Overhaul
 {
@@ -29,29 +28,14 @@ namespace Door_Overhaul
             /// </summary>
             public static void Postfix()
             {
-                //AddDoorToBuildMenu(PneumaticTrapDoor.CategoryMenu, PneumaticTrapDoor.ID, PneumaticTrapDoor.SubCategoryID);
-                //AddDoorToTechTree(PneumaticTrapDoor.ID, PneumaticTrapDoor.Tech);
+                AddBuildingToMenu(PneumaticTrapDoor.GetCategoryMenu(), PneumaticTrapDoor.GetBuildingID(), 
+                    PneumaticTrapDoor.GetSubCategoryID(), PneumaticTrapDoor.GetTechID());
 
-                //AddDoorToBuildMenu(PneumaticTrapDoorReplace.CategoryMenu, PneumaticTrapDoorReplace.ID, PneumaticTrapDoorReplace.SubCategoryID);
+                AddBuildingToMenu(PneumaticTrapDoorReplace.GetCategoryMenu(), PneumaticTrapDoorReplace.GetBuildingID(), 
+                    PneumaticTrapDoorReplace.GetSubCategoryID(), PneumaticTrapDoorReplace.GetTechID() );
 
-                //AddDoorToTechTree(PneumaticTrapDoorReplace.ID, PneumaticTrapDoorReplace.Tech);
-
-                //Debug.Log(">> pneumaticTrapDoor.GetID() " + PneumaticTrapDoor.ID);
-                //Debug.Log(">> pneumaticTrapDoorReplace.GetID() " + PneumaticTrapDoorReplace.ID);
-
-                AddDoorToBuildMenu(PneumaticTrapDoor.GetCategoryMenu(),
-                    PneumaticTrapDoor.GetID(), PneumaticTrapDoor.GetSubCategoryID());
-
-                AddDoorToTechTree(PneumaticTrapDoor.GetID(), PneumaticTrapDoor.GetTech());
-
-                AddDoorToBuildMenu(PneumaticTrapDoorReplace.GetCategoryMenu(),
-                    PneumaticTrapDoorReplace.GetID(), PneumaticTrapDoorReplace.GetSubCategoryID());
-
-                AddDoorToTechTree(PneumaticTrapDoorReplace.GetID(), PneumaticTrapDoorReplace.GetTech());
-
-                Debug.Log(">> pneumaticTrapDoor.GetID() " + PneumaticTrapDoor.GetID());
-                Debug.Log(">> pneumaticTrapDoorReplace.GetID() " + PneumaticTrapDoorReplace.GetID());
-
+                Debug.Log("Lele - pneumaticTrapDoor.GetID() " + PneumaticTrapDoor.GetBuildingID());
+                Debug.Log("Lele - pneumaticTrapDoorReplace.GetID() " + PneumaticTrapDoorReplace.GetBuildingID());
 
             }
         }
