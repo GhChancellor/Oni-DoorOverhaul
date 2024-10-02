@@ -26,7 +26,7 @@ namespace Door_Overhaul
                 id: buildingID,
                 width: 1,
                 height: 1,
-                anim: "tiny_door_internal_kanim",
+                anim: "trap_door_external_kanim",
                 hitpoints: 30,
                 construction_time: Construction.constructionTime,
                 construction_mass: Construction.constructionMass,

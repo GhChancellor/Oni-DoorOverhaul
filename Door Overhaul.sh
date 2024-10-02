@@ -1,6 +1,11 @@
 #!/bin/bash
 
 echo
+
+echo -e "\e[32m ----------------------------- Removing bin and obj folders... ----------------------------- \e[0m"
+rm -rf bin obj
+echo -e "\e[32m Bin and obj folders removed. \e[0m"
+
 echo -e "\e[32m ----------------------------- clean project... ----------------------------- \e[0m"
 echo
 dotnet clean "Door Overhaul.csproj"

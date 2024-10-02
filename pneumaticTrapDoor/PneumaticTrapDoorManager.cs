@@ -47,8 +47,8 @@
             constructionTime = 1f; // TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
 
             deconstructable.SetWorkTime(constructionTime);
-            deconstructable.Trigger( (int) GameHashes.MarkForDeconstruct, null);
-            deconstructable.Trigger( (int) GameHashes.RefreshUserMenu, null);
+            deconstructable.Trigger((int)GameHashes.MarkForDeconstruct, null);
+            deconstructable.Trigger((int)GameHashes.RefreshUserMenu, null);
         }
     }
 }

@@ -1,0 +1,18 @@
+check_command() {
+    if [ $? -ne 0 ]; then
+        echo "Errore: $1"
+        exit 1
+    fi
+}
+
+echo "Aggiornamento dei repository..."
+sudo apt update
+check_command "Aggiornamento repository fallito"
+
+
+if [ $? -ne 0 ]; then:
+
+# $? è una variabile speciale in Bash che contiene il codice di uscita dell'ultimo comando eseguito.
+# -ne 0 significa "non uguale a zero".
+# In Unix/Linux, un codice di uscita 0 indica generalmente successo, mentre qualsiasi altro # valore indica un errore.
+# Quindi, questa riga controlla se l'ultimo comando ha prodotto un errore.
