@@ -1,155 +1,152 @@
-﻿namespace Door_Overhaul
+using UnityEngine;
+
+namespace Door_Overhaul
 {
     internal class MoveButton : KMonoBehaviour
     {
-#pragma warning disable CS0649
-        [MyCmpGet]
-        private Deconstructable deconstructable;
-        [MyCmpGet]
-        private Constructable constructable;
+        private readonly ManagementError err =
+            new ("# DoorOverhaul > ", "MoveButton.cs > ");
 
-#pragma warning restore CS0649
+        public string BuildingID { get; set; }
+        DiscoveryEventManager discoveryEvent = new DiscoveryEventManager();
 
-        public static string BuildingID { get; set; }
+        public MoveButton() { }
 
-        private static readonly Dictionary<string, Action<Deconstructable>> destroyActions =
-            new Dictionary<string, Action<Deconstructable>>
+        /// <summary>
+        /// Called when the building is spawned. Retrieves the Building component and saves its prefab ID.
+        /// </summary>
+        protected override void OnSpawn()
         {
-            {PneumaticTrapDoor.GetBuildingID(), (deconstructable) => new PneumaticTrapDoorManager().Destroy(deconstructable)},
-            {PneumaticTrapDoorReplace.GetBuildingID(), (deconstructable) => new PneumaticTrapDoorManager().Destroy(deconstructable)},
-
-            // {NoPawNoProblemDoor.GetBuildingID(), (deconstructable) => new NoPawNoProblemDoorManager().Destroy(deconstructable)},
-            // {NoPawNoProblemDoorReplace.GetBuildingID(), (deconstructable) => new NoPawNoProblemDoorManager().Destroy(deconstructable)}
-
-        };
-
-        protected override void OnPrefabInit()
-        {
-            base.OnPrefabInit();
-            this.Subscribe((int)GameHashes.RefreshUserMenu,
-                new System.Action<object>(OnRefreshUserMenu));
-        }
-
-        protected override void OnCleanUp()
-        {
-            Unsubscribe((int)GameHashes.RefreshUserMenu);
-            base.OnCleanUp();
-        }
-
-        private void OnRefreshUserMenu(object data)
-        {
-            Game.Instance.userMenu.AddButton(
-                go: this.gameObject,
-                button: new KIconButtonMenu.ButtonInfo(
-                    iconName: "action_mirror",
-                    text: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.NAME,
-                    on_click: new System.Action(() => DuplicateDoor()),
-                    shortcutKey: Action.BuildingUtility1,
-                    tooltipText: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.TOOLTIP
-                )
-            );
-        }
-
-        private void DeconstructableX01()
-        {
-            var buildingDef = Assets.GetBuildingDef(BuildingID);
-
-            /* --------------------Cambia tempo di distruzione----------------------- */
-            Console.WriteLine("Lele - deconstructable() Before :" + BuildingID);
-            Console.WriteLine("Lele - deconstructable() Before :" + buildingDef.ConstructionTime);
-
-            buildingDef.ConstructionTime = 15f;
-
-            Console.WriteLine("Lele - deconstructable() after :" + buildingDef.ConstructionTime);
-
-            deconstructable.SetWorkTime(buildingDef.ConstructionTime);
-
-            Console.WriteLine("Lele - deconstructable() after - GetWorkTime():" + deconstructable.GetWorkTime());
-            /* ---------------------------------------------------- */
-        }
-
-        private void ConstructableX01()
-        {
-            /* --------------------Cambia tempo di distruzione----------------------- */
-            var buildingDef = Assets.GetBuildingDef(BuildingID);
-
-            Console.WriteLine("Lele - constructable() Before :" + BuildingID);
-            Console.WriteLine("Lele - constructable() Before :" + buildingDef.ConstructionTime);
-
-            buildingDef.ConstructionTime = 15f;
-
-            Console.WriteLine("Lele - constructable() after :" + buildingDef.ConstructionTime);
-
-            constructable.SetWorkTime(buildingDef.ConstructionTime);
-
-            Console.WriteLine("Lele - constructable() after - GetWorkTime():" + constructable.GetWorkTime());
-            /* ---------------------------------------------------- */
-        }
-
-
-        private void DuplicateDoor()
-        {
-            Destroy(deconstructable);
-            PlanScreen planScreen = PlanScreen.Instance;
-
-            var buildingDef = Assets.GetBuildingDef(BuildingID);
-
-            if (buildingDef != null && planScreen != null)
-            {
-                planScreen.CopyBuildingOrder(buildingDef, BuildingID);
-            }
-        }
-
-        private void Destroy(Deconstructable deconstructable)
-        {
-            if (destroyActions.TryGetValue(BuildingID, out var destroyAction))
-            {
-                destroyAction(deconstructable);
-            }
-        }
-
-        private void DuplicateDoor2()
-        {
-            Debug.Log("Lele - Start - Duplicate ");
             try
             {
-                Debug.Log($"Attempting to add building {BuildingID} to plan screen");
+                base.OnSpawn();
 
-                var buildingDef = Assets.GetBuildingDef(BuildingID);
-                if (buildingDef == null)
-                {
-                    Debug.LogError($"BuildingDef not found for {BuildingID}");
-                    return;
-                }
-                Debug.Log($"BuildingDef found for {BuildingID}");
+                var building = GetComponent<Building>();
 
-                var planScreen = PlanScreen.Instance;
-                if (planScreen == null)
-                {
-                    Debug.LogError("PlanScreen instance is null");
-                    return;
-                }
-                Debug.Log("PlanScreen instance found");
+                if (building == null) return;
 
-                if (buildingDef != null && planScreen != null)
-                {
-                    Debug.Log($"Attempting to copy building order for {BuildingID}");
-                    planScreen.CopyBuildingOrder(buildingDef, BuildingID);
-                    Debug.Log($"Successfully copied building order for {BuildingID}");
-                }
-                else
-                {
-                    Debug.LogWarning($"Either buildingDef or planScreen is null for {BuildingID}");
-                }
+                BuildingID = building.Def.PrefabID;
+
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                Debug.LogError($"Error adding building {BuildingID} to plan screen: {e.Message}");
-                Debug.LogException(e);
+                Debug.LogError(err.GetMessageAndCode() + $"1 OnSpawn(): Exception - {e.Message} Stack: {e.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Called when the building is initialized after all prefabs are loaded. Subscribes to the RefreshUserMenu event.
+        /// </summary>
+        protected override void OnPrefabInit()
+        {
+            try
+            {
+                base.OnPrefabInit();
+                Subscribe((int)GameHashes.RefreshUserMenu, new Action<object>(OnRefreshUserMenu));
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"2 OnPrefabInit(): Exception - {e.Message} Stack: {e.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Called when the building is cleaned up. Unsubscribes from the RefreshUserMenu event.
+        /// </summary>
+        protected override void OnCleanUp()
+        {
+            try
+            {
+                base.OnCleanUp();
+                Unsubscribe((int)GameHashes.RefreshUserMenu);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"3 OnCleanUp(): Exception - {e.Message} Stack: {e.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Called when the RefreshUserMenu event is triggered.
+        /// </summary>
+        /// <param name="data"></param>
+        private void OnRefreshUserMenu(object data)
+        {
+            try
+            {
+                var buildingMaterialReplacer = gameObject.AddComponent<BuildingMaterialReplacer>();
+                buildingMaterialReplacer.BuildingID = BuildingID;
+
+                Game.Instance.userMenu.AddButton(
+                    go: gameObject,
+                    button: new KIconButtonMenu.ButtonInfo(
+                        iconName: "action_mirror",
+                        text: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.NAME,
+                        on_click: new System.Action(() => buildingMaterialReplacer.CopyAndReplace(BuildingID, gameObject)),
+                        shortcutKey: Action.BuildingUtility1,
+                        tooltipText: STRINGS.BUILDINGS.PREFABS.MOVEDOOR.TOOLTIP
+                    )
+                );
+
+#if DEBUG
+                Game.Instance.userMenu.AddButton(
+                    go: gameObject,
+                    button: new KIconButtonMenu.ButtonInfo(
+                        iconName: "action_mirror",
+                        text: "Button Test",
+                        on_click: new System.Action(() => ButtonTest()),
+                        shortcutKey: Action.BuildingUtility1,
+                        tooltipText: "Button Test"
+                    )
+                );
+#endif               
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"4 OnRefreshUserMenu() : {ex}");
+            }
+        }
+
+#if DEBUG
+        /// <summary>
+        /// It's test class
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses")]
+        private void ButtonTest()
+        {
+            GameObject obj = null;
+            if (SelectTool.Instance.selected != null)
+            {
+                obj = SelectTool.Instance.selected.gameObject;
+                if (obj == null)
+                {
+                    Debug.LogError(err.GetMessageAndCode() + $"5 ButtonTest(): Selected object found");
+                }
+            }
+            else
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"6 ButtonTest(): No selected object");
+                return;
             }
 
-            Debug.Log("Lele - Stop - Duplicate ");
-            BuildingID = null;
+            discoveryEvent.InitGlobalEvent(obj);
+
+            /* Test global event */
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.ClickTile, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.BuildingActivated, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.ActiveChanged, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.ActiveToolChanged, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.BuildingCompleteDestroyed, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.SetActivator, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.NewBuilding, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.NewConstruction, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableStartWork, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableCompleteWork, true);
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableStopWork, true);
+
+            /* Test local event */
+            discoveryEvent.ToggleAllEvent(obj, GameHashes.DeconstructComplete, false);
         }
+#endif
     }
 }

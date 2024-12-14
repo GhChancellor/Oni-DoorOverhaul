@@ -11,7 +11,6 @@ namespace Door_Overhaul
 #pragma warning restore CS0649
 
         private PneumaticTrapDoorManager pneumaticTrapDoorManager;
-
         protected override void OnPrefabInit()
         {
             pneumaticTrapDoorManager = new PneumaticTrapDoorManager();
@@ -71,5 +70,18 @@ namespace Door_Overhaul
                 Debug.LogError("CopySettingsTool non trovato");
             }
         }
+
+        private void DuplicateDoor()
+        {
+            Destroy(deconstructable);
+            PlanScreen planScreen = PlanScreen.Instance;
+
+            var buildingDef = Assets.GetBuildingDef(BuildingID);
+
+            if (buildingDef != null && planScreen != null)
+            {
+                planScreen.CopyBuildingOrder(buildingDef, BuildingID);
+            }
+        }           
     }
 }

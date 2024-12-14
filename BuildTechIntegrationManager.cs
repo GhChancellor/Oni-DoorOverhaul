@@ -2,6 +2,9 @@
 {
     internal class BuildTechIntegrationManager
     {
+        private readonly static ManagementError err =
+            new("# DoorOverhaul > ", "BuildTechIntegrationManager.cs > ");
+
         /// <summary>
         /// Adds a building to the construction menu and unlocks it in the tech tree if applicable.
         /// </summary>
@@ -11,14 +14,20 @@
         /// <param name="techID">The technology ID required to unlock the building ("none" if no tech is required)</param>       
         public static void AddBuildingToMenu(string categoryMenu, string buildingID, string subCategoryID, string techID)
         {
-            ModUtil.AddBuildingToPlanScreen(categoryMenu, buildingID, subCategoryID);
+            try
+            {
+                ModUtil.AddBuildingToPlanScreen(categoryMenu, buildingID, subCategoryID);
 
-            var groupID = Db.Get().Techs.TryGet(techID);
+                var groupID = Db.Get().Techs.TryGet(techID);
 
-            if (techID == "none")
-                return;
+                if (techID == "none") return;
 
-            groupID.unlockedItemIDs.Add(buildingID);
+                groupID.unlockedItemIDs.Add(buildingID);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"1 AddBuildingToMenu() Failed to add building to menu {ex.Message}");
+            }
         }
     }
 }

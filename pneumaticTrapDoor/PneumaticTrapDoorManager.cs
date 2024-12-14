@@ -2,6 +2,9 @@
 {
     internal class PneumaticTrapDoorManager : IDoorOperations
     {
+        private readonly ManagementError err =
+            new("# DoorOverhaul > ", "PneumaticTrapDoorManager.cs > ");
+
         private float[] constructionMass;
         private float constructionTime;
 
@@ -12,13 +15,21 @@
         /// <returns>float[] constructionMass, float constructionTime</returns>
         public (float[] constructionMass, float constructionTime) Create()
         {
-            /* 50 kg */
-            constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER1;
+            try
+            {
+                /* 50 kg */
+                constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER1;
 
-            /* 5 seconds */
-            constructionTime = 5f;
+                /* 5 seconds */
+                constructionTime = 1f; //5f;
 
-            return (constructionMass, constructionTime);
+                return (constructionMass, constructionTime);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"1 Create() {ex.Message}");
+                throw;
+            }
         }
 
         /// <summary>
@@ -28,13 +39,21 @@
         /// <returns>float[] constructionMass, float constructionTime</returns>
         public (float[] constructionMass, float constructionTime) Replace()
         {
-            /* 5 kg */
-            constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER_TINY;
+            try
+            {
+                /* 5 kg */
+                constructionMass = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER_TINY;
 
-            /* 3 seconds */
-            constructionTime = 1f; //TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
+                /* 3 seconds */
+                constructionTime = 1f; //TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
 
-            return (constructionMass, constructionTime);
+                return (constructionMass, constructionTime);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"2 Replace() {ex.Message}");
+                throw;
+            }
         }
 
         /// <summary>
@@ -43,12 +62,22 @@
         /// <param name="deconstructable"></param>
         public void Destroy(Deconstructable deconstructable)
         {
-            /* 3 seconds */
-            constructionTime = 1f; // TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
+            try
+            {
+                /* 3 seconds */
+                constructionTime = 1f; // TUNING.BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER0;
 
-            deconstructable.SetWorkTime(constructionTime);
-            deconstructable.Trigger((int)GameHashes.MarkForDeconstruct, null);
-            deconstructable.Trigger((int)GameHashes.RefreshUserMenu, null);
+                deconstructable.SetWorkTime(constructionTime);
+                deconstructable.Trigger((int)GameHashes.MarkForDeconstruct, null);
+                deconstructable.Trigger((int)GameHashes.RefreshUserMenu, null);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(err.GetMessageAndCode() + $"3 Destroy() {ex.Message}");
+            }
+
+
+
         }
     }
 }

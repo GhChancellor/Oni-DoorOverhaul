@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="HarmonyX" Version="2.10.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>../libs/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>../libs/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>../libs/0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>../libs/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>../libs/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>../libs/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>../libs/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>../libs/UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+
+    <Content Include="anim/**/*" />
+    <Content Include="translations/it_IT.po" />
+
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <PropertyGroup>
+      <ModFolder>/home/${USER}/.config/unity3d/Klei/Oxygen Not Included/mods/Dev/DoorOverhaul</ModFolder>
+    </PropertyGroup>
+    <Exec Command="mkdir -p &quot;$(ModFolder)/anim&quot;" />
+    <Exec Command="midir -p &quot;$(ModFolder)/translations&quot;" />
+
+    <Exec Command="rsync -av &quot;$(TargetPath)&quot; &quot;$(ModFolder)/Door Overhaul.dll&quot;" />
+    <Exec Command="rsync -av &quot;anim&quot; &quot;$(ModFolder)/&quot;" />
+    <Exec Command="rsync -av &quot;translations&quot; &quot;$(ModFolder)/&quot;" />
+  </Target>
+</Project>
