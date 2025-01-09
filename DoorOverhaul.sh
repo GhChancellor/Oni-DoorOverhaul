@@ -2,7 +2,7 @@
 
 echo
 
-NAME="Door Overhaul.csproj"
+NAME="DoorOverhaul.csproj"
 
 echo -e "\e[32m ----------------------------- Removing bin and obj folders... ----------------------------- \e[0m"
 rm -rf bin obj

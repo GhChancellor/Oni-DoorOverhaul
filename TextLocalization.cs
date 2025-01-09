@@ -31,7 +31,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"1 Translate() : Failed to translate {ex}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"1 Translate() : Failed to translate {ex.Message} Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -67,7 +68,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"2 LoadTranslateFile() Failed to load translate file with path. Error: {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"2 LoadTranslateFile() Failed to load translate file with path. Error: {ex.Message} Stack: \n{ex.StackTrace}");
                 throw;
             }
         }

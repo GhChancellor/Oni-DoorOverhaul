@@ -27,7 +27,8 @@
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"1 Create() {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                    $"1 Create() {ex.Message} Stack: \n{ex.StackTrace}");
                 throw;
             }
         }
@@ -51,7 +52,8 @@
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"2 Replace() {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                    $"2 Replace() {ex.Message} Stack: \n{ex.StackTrace}");
                 throw;
             }
         }
@@ -73,11 +75,9 @@
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"3 Destroy() {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                   $"3 Destroy() {ex.Message} Stack: \n{ex.StackTrace}");
             }
-
-
-
         }
     }
 }

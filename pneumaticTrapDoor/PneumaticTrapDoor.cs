@@ -25,7 +25,6 @@ namespace Door_Overhaul
             {
                 /* Change construction time and mass */
                 var Construction = InitiateTrapDoorBuild();
-    
 
                 // Initialize the building definition with specific parameters.
                 BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(
@@ -64,7 +63,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"1 CreateBuildingDef() {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                    $"1 CreateBuildingDef() {ex.Message} Stack: \n{ex.StackTrace}");
                 throw;
             }
         }
@@ -102,7 +102,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"2 DoPostConfigureComplete() : {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                    $"2 DoPostConfigureComplete() : {ex.Message} Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -120,7 +121,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"3 InitiateTrapDoorBuild() : {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() +
+                    $"3 InitiateTrapDoorBuild() : {ex.Message} Stack: \n{ex.StackTrace}");
                 throw;
             }
         }

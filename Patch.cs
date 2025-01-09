@@ -27,7 +27,8 @@ namespace Door_Overhaul
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError(err.GetMessageAndCode() + $"1 Postfix() traslate {ex.Message}");
+                    Debug.LogError(err.GetMessageAndCode() + 
+                        $"1 Postfix() traslate {ex.Message} Stack: \n{ex.StackTrace}");
                 }
             }
         }
@@ -51,7 +52,8 @@ namespace Door_Overhaul
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError(err.GetMessageAndCode() + $"2 Postfix() add building menu {ex.Message}");
+                    Debug.LogError(err.GetMessageAndCode() + 
+                        $"2 Postfix() add building menu {ex.Message} Stack: \n{ex.StackTrace}");
                 }
                 // AddBuildingToMenu(PneumaticTrapDoorReplace.GetCategoryMenu(), PneumaticTrapDoorReplace.GetBuildingID(),
                 //     PneumaticTrapDoorReplace.GetSubCategoryID(), PneumaticTrapDoorReplace.GetTechID());

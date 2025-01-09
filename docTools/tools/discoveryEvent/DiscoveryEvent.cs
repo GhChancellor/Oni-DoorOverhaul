@@ -4,39 +4,41 @@ namespace Door_Overhaul
 {
     internal class DiscoveryEvent
     {
-        private readonly string nameMod = "### DoorOverhaul ###";
-
-        private readonly string nameClass = "DiscoveryEvent.cs >";
-
-        public Action<object> GameplayEventHandler { get; set; }
-
-        private GameHashes GameHashes { get; set; }
-
-        public GameObject GameObject { get; set; }
-
-        public string Description { get; set; }
+        private readonly ManagementError err =
+            new("# DoorOverhaul > ", "DiscoveryEvent.cs > ");
 
         public bool IsActive { get; set; }
+        public string Description { get; private set; }
+        public GameHashes GameHash { get; private set; }
+        public Action<object> GameplayEventHandler { get; private set; }
+        public bool Verbose { get; set; } 
+        public bool IsGlobalEvent { get; private set; }
+        public GameObject GameObject { get; private set; }
 
-        public void AddGlobalEvent(GameHashes gameHashes,
-            string description, bool isActive, Action<object> gameplayEventHandler)
+        public void AddGlobalEvent(GameHashes gameHash, string description, bool isActive, Action<object> handler, bool verbose )
         {
-            GameHashes = gameHashes;
+            GameHash = gameHash;
             Description = description;
             IsActive = isActive;
-            GameplayEventHandler = gameplayEventHandler;
-            Debug.Log($"{nameMod} {nameClass} AddGlobalEvent > X1 Added {description}");
+            GameplayEventHandler = handler;
+            IsGlobalEvent = true;
+            Verbose = verbose;
+
+            Debug.Log(err.GetMessageAndCode() + $"1 AddGlobalEvent > Added {Description}");
         }
 
-        public void AddComponetEvent(GameObject gameObject, GameHashes gameHashes,
-            string description, bool isActive, Action<object> gameplayEventHandler)
-        { 
-            GameObject = gameObject;
-            GameHashes = gameHashes;
+        public void AddComponetEvent(GameObject gameObject, 
+            GameHashes gameHash, string description, bool isActive, Action<object> handler, bool verbose )
+        {
+            GameHash = gameHash;
             Description = description;
             IsActive = isActive;
-            GameplayEventHandler = gameplayEventHandler;
-            Debug.Log($"{nameMod} {nameClass} AddComponetEvent > X2 Added {description}");
+            GameplayEventHandler = handler;
+            IsGlobalEvent = false;
+            GameObject = gameObject;
+            Verbose = verbose;
+
+            Debug.Log(err.GetMessageAndCode() + $"2 AddComponetEvent > Added {Description}");
         }
     }
 }

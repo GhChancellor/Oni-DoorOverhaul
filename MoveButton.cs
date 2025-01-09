@@ -5,10 +5,9 @@ namespace Door_Overhaul
     internal class MoveButton : KMonoBehaviour
     {
         private readonly ManagementError err =
-            new ("# DoorOverhaul > ", "MoveButton.cs > ");
+            new("# DoorOverhaul > ", "MoveButton.cs > ");
 
         public string BuildingID { get; set; }
-        DiscoveryEventManager discoveryEvent = new DiscoveryEventManager();
 
         public MoveButton() { }
 
@@ -28,9 +27,10 @@ namespace Door_Overhaul
                 BuildingID = building.Def.PrefabID;
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"1 OnSpawn(): Exception - {e.Message} Stack: {e.StackTrace}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"1 OnSpawn(): Exception - {ex.Message}  Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -44,9 +44,10 @@ namespace Door_Overhaul
                 base.OnPrefabInit();
                 Subscribe((int)GameHashes.RefreshUserMenu, new Action<object>(OnRefreshUserMenu));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"2 OnPrefabInit(): Exception - {e.Message} Stack: {e.StackTrace}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"2 OnPrefabInit(): Exception - {ex.Message} Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -60,9 +61,10 @@ namespace Door_Overhaul
                 base.OnCleanUp();
                 Unsubscribe((int)GameHashes.RefreshUserMenu);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"3 OnCleanUp(): Exception - {e.Message} Stack: {e.StackTrace}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"3 OnCleanUp(): Exception - {ex.Message}  Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -103,7 +105,8 @@ namespace Door_Overhaul
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"4 OnRefreshUserMenu() : {ex}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"4 OnRefreshUserMenu() : {ex.Message} Stack: \n{ex.StackTrace}");
             }
         }
 
@@ -114,38 +117,82 @@ namespace Door_Overhaul
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses")]
         private void ButtonTest()
         {
-            GameObject obj = null;
-            if (SelectTool.Instance.selected != null)
-            {
-                obj = SelectTool.Instance.selected.gameObject;
-                if (obj == null)
-                {
-                    Debug.LogError(err.GetMessageAndCode() + $"5 ButtonTest(): Selected object found");
-                }
-            }
-            else
-            {
-                Debug.LogError(err.GetMessageAndCode() + $"6 ButtonTest(): No selected object");
-                return;
-            }
+            // Debug.Log(err.GetMessageAndCode() + $"7 ButtonTest() entered");
 
-            discoveryEvent.InitGlobalEvent(obj);
+            EventAnalytics eventAnalytics = new(this.gameObject);
 
-            /* Test global event */
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.ClickTile, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.BuildingActivated, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.ActiveChanged, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.ActiveToolChanged, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.BuildingCompleteDestroyed, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.SetActivator, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.NewBuilding, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.NewConstruction, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableStartWork, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableCompleteWork, true);
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.WorkableStopWork, true);
+            EventBroadcast eventBroadcast = new(this.gameObject);
+            eventBroadcast.SearchEventsByComponent(EventFilterEnum.ALL);
+            
+            // eventBroadcast.EventHandlers.Add
+            //     (GameHashes.HighlightStatusItem, obj =>
+            //     { eventBroadcast.DoSomething(obj); });
 
-            /* Test local event */
-            discoveryEvent.ToggleAllEvent(obj, GameHashes.DeconstructComplete, false);
+            // eventBroadcast.SearchEvents(EventFilterEnum.GAMEHASHES);
+            // InitEvent(eventAnalytics);
+
+
+            /*  init Global event */
+            // eventAnalytics.AddEvent(GameHashes.ActiveToolChanged, "ActiveToolChanged", true);
+            // eventAnalytics.AddEvent(GameHashes.BuildToolDeactivated, "BuildToolDeactivated", true);
+            // eventAnalytics.AddEvent(GameHashes.NewBuilding, "NewBuilding", true);
+            // eventAnalytics.AddEvent(GameHashes.BuildingStateChanged, "BuildingStateChanged", true, true);
+
+            // /* init local Event */
+
+
+
+            // /* Test - Global Event */
+            // eventAnalytics.ToggleEvent(GameHashes.ActiveToolChanged);
+            // eventAnalytics.ToggleEvent(GameHashes.BuildToolDeactivated);
+            // eventAnalytics.ToggleEvent(GameHashes.NewBuilding);
+            // eventAnalytics.ToggleEvent(GameHashes.BuildingStateChanged);
+
+            /* Test -  Component Events */
+
+            // /* Unkwon event */
+            // eventAnalytics.ToggleEvent(GameHashes.Craft);
+            // eventAnalytics.ToggleEvent(GameHashes.HoverObject);
+            // eventAnalytics.ToggleEvent(GameHashes.StartWork);
+            // eventAnalytics.ToggleEvent(GameHashes.UseBuilding);
+        }
+
+        private void InitEvent(EventAnalytics eventAnalytics)
+        {
+            // /* Add Global event */
+            eventAnalytics.AddEvent(GameHashes.ClickTile, "ClickTile", true);
+            eventAnalytics.AddEvent(GameHashes.BuildingActivated, "BuildingActivated", true);
+            eventAnalytics.AddEvent(GameHashes.ActiveChanged, "ActiveChanged", true);
+            eventAnalytics.AddEvent(GameHashes.ActiveToolChanged, "ActiveToolChanged", true);
+            eventAnalytics.AddEvent(GameHashes.BuildingCompleteDestroyed, "BuildingCompleteDestroyed", true);
+            eventAnalytics.AddEvent(GameHashes.SetActivator, "SetActivator", true);
+            eventAnalytics.AddEvent(GameHashes.NewBuilding, "NewBuilding", true);
+            eventAnalytics.AddEvent(GameHashes.NewConstruction, "NewConstruction", true);
+            eventAnalytics.AddEvent(GameHashes.WorkableStartWork, "WorkableStartWork", true);
+            eventAnalytics.AddEvent(GameHashes.WorkableCompleteWork, "WorkableCompleteWork", true);
+            eventAnalytics.AddEvent(GameHashes.WorkableStopWork, "WorkableStopWork", true);
+
+            /* Add Local event */
+            eventAnalytics.AddEvent(GameHashes.DeconstructComplete, "DeconstructComplete", false);
+            eventAnalytics.AddEvent(GameHashes.SelectObject, "SelectObject", false);
+
+
+            /* Active Global event */
+            eventAnalytics.ToggleEvent(GameHashes.ClickTile);
+            eventAnalytics.ToggleEvent(GameHashes.BuildingActivated);
+            eventAnalytics.ToggleEvent(GameHashes.ActiveChanged);
+            eventAnalytics.ToggleEvent(GameHashes.ActiveToolChanged);
+            eventAnalytics.ToggleEvent(GameHashes.BuildingCompleteDestroyed);
+            eventAnalytics.ToggleEvent(GameHashes.SetActivator);
+            eventAnalytics.ToggleEvent(GameHashes.NewBuilding);
+            eventAnalytics.ToggleEvent(GameHashes.NewConstruction);
+            eventAnalytics.ToggleEvent(GameHashes.WorkableStartWork);
+            eventAnalytics.ToggleEvent(GameHashes.WorkableCompleteWork);
+            eventAnalytics.ToggleEvent(GameHashes.WorkableStopWork);
+
+            /* Active Local event */
+            eventAnalytics.ToggleEvent(GameHashes.DeconstructComplete);
+            eventAnalytics.ToggleEvent(GameHashes.SelectObject);
         }
 #endif
     }

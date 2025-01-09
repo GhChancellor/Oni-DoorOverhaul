@@ -26,7 +26,8 @@
             }
             catch (Exception ex)
             {
-                Debug.LogError(err.GetMessageAndCode() + $"1 AddBuildingToMenu() Failed to add building to menu {ex.Message}");
+                Debug.LogError(err.GetMessageAndCode() + 
+                    $"1 AddBuildingToMenu() Failed to add building to menu {ex.Message} Stack: \n{ex.StackTrace}");
             }
         }
     }

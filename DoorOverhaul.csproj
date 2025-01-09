@@ -1,20 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <!-- Basic project settings -->
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net472</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>  <!--disable-->
-    <LangVersion>10</LangVersion> <!--Add it-->
+    
+    <!-- Disabled for Unity compatibility -->
+    <Nullable>disable</Nullable> 
+
+    <!-- Enables C# 10 features -->
+    <LangVersion>10</LangVersion> 
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Harmony for runtime patching -->
     <PackageReference Include="HarmonyX" Version="2.10.0" />
+    
+    <!-- Reference assemblies for .NET Framework 4.7.2 -->
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
 
+    <!-- Game and engine dependencies -->
     <Reference Include="Assembly-CSharp">
       <HintPath>../libs/Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -24,6 +32,8 @@
     <Reference Include="0Harmony">
       <HintPath>../libs/0Harmony.dll</HintPath>
     </Reference>
+    
+    <!-- Unity engine core dependencies -->
     <Reference Include="UnityEngine">
       <HintPath>../libs/UnityEngine.dll</HintPath>
     </Reference>
@@ -40,25 +50,30 @@
       <HintPath>../libs/UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
 
+    <!-- Mod content files -->
     <Content Include="anim/**/*" />
     <Content Include="translations/it_IT.po" />
     <Content Include="mod.yaml" />
     <Content Include="mod_info.yaml" />
   </ItemGroup>
+
+  <!-- Post-build deployment steps -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <PropertyGroup>
+      <!-- Define mod installation directory -->
       <ModFolder>/home/${USER}/.config/unity3d/Klei/Oxygen Not Included/mods/Dev/DoorOverhaul</ModFolder>
-      <ModName>Door Overhaul.dll</ModName>
+      <ModName>DoorOverhaul.dll</ModName>
     </PropertyGroup>
+    
+    <!-- Create required directories -->
     <Exec Command="mkdir -p &quot;$(ModFolder)/anim&quot;" />
     <Exec Command="mkdir -p &quot;$(ModFolder)/translations&quot;" />
-
+    
+    <!-- Copy mod files to installation directory -->
     <Exec Command="rsync -av &quot;mod.yaml&quot; &quot;$(ModFolder)/mod.yaml&quot;" />
     <Exec Command="rsync -av &quot;mod_info.yaml&quot; &quot;$(ModFolder)/mod_info.yaml&quot;" />
     <Exec Command="rsync -av --delete &quot;$(TargetPath)&quot; &quot;$(ModFolder)/$(ModName)&quot;" />
     <Exec Command="rsync -av --delete &quot;anim&quot; &quot;$(ModFolder)/&quot;" />
     <Exec Command="rsync -av --delete &quot;translations&quot; &quot;$(ModFolder)/&quot;" />
   </Target>
-
 </Project>
-
